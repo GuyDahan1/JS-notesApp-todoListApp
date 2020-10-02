@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Todos</h1>
+    <input id="searchTodoInput" type="text" placeholder="Search todo here">
+    <label>
+        <input type="checkbox" id="hideCompleted"> Hide completed
+    </label>
+    <div id="todos"></div>
+    <form id="addTodoForm">
+        <input type="text" placeholder="Add Todo" name="addTodoInput">
+        <button>Submit</button>
+    </form>
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <script src="todos-function.js"></script>
+    <script src="todo-list.js"></script>
+</body>
+</html>
