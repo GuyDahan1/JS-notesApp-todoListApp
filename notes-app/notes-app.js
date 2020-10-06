@@ -8,12 +8,13 @@ renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function () {
     const id = uuidv4()
-
-
+    const timeStamp = moment().valueOf()
     notes.push({
         id: id,
         title: '',
-        body: ''
+        body: '',
+        createdAt:timeStamp,
+        updateAt:timeStamp
     })
     saveNotes(notes)
     location.assign(`/notes-app/edit.html#${id}`)
@@ -34,3 +35,5 @@ window.addEventListener('storage',function (e) {
         renderNotes(notes,filters)
     }
 })
+
+
