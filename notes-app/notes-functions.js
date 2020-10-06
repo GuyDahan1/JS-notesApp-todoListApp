@@ -52,20 +52,60 @@ const generateNoteDOM = function (note) {
     return noteEl
 }
 
+function sortByFunc(notes, sortBy) {
+    console.log('soryByFunc')
+    if (sortBy === 'byEdited') {
+        console.log('byEdited')
+        return notes.sort(function (a, b) {
+            if (a.updateAt > b.updateAt) {
+                return -1
+            } else if (a.updateAt < b.updateAt) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+    } else if (sortBy === 'byCreated') {
+        return notes.sort(function (a, b) {
+            if (a.createdAt > b.createdAt) {
+                return -1
+            } else if (a.createdAt < b.createdAt) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+
+    } else if (sortBy === 'alphabetical') {
+        return notes.sort(function (a, b) {
+            if (a.title.toLowerCase() < b.title.toLowerCase()) {
+                return -1
+            } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+    }
+}
+
 // Render application notes
-const renderNotes = function (notes, filters) {
-    const filteredNotes = notes.filter(function (note) {
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    })
+    const renderNotes = function (notes, filters) {
 
-    document.querySelector('#notes').innerHTML = ''
+        notes = sortByFunc(notes, filters.sortBy)
 
-    filteredNotes.forEach(function (note) {
-        const noteEl = generateNoteDOM(note)
-        document.querySelector('#notes').appendChild(noteEl)
-    })
-}
+        const filteredNotes = notes.filter(function (note) {
+            return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
+        })
 
-function genLastEdited(time) {
-    return `Last edited ${moment(time).fromNow()}`;
-}
+        document.querySelector('#notes').innerHTML = ''
+
+        filteredNotes.forEach(function (note) {
+            const noteEl = generateNoteDOM(note)
+            document.querySelector('#notes').appendChild(noteEl)
+        })
+    }
+
+    function generateLastEdited(timestamp) {
+        return `Last edited ${moment(timestamp).fromNow()}`;
+    }

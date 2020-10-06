@@ -4,55 +4,51 @@ const removeElement = document.querySelector('#remove-note')
 const dateElement = document.querySelector('#last-edited')
 const noteId = location.hash.substring(1)
 let notes = getSavedNotes()
-
 let note = notes.find(function (note) {
     return note.id === noteId
 })
 
-if (note === undefined){
-    location.assign('/notes-app')
+if (note === undefined) {
+    location.assign('/index.html')
 }
 
 titleElement.value = note.title
 bodyElement.value = note.body
-dateElement.textContent = genLastEdited(note.updateAt)
+dateElement.textContent = generateLastEdited(note.updateAt)
 
-
-titleElement.addEventListener('input',function (e) {
+titleElement.addEventListener('input', function (e) {
     note.title = e.target.value
-    note.updateAt = moment.valueOf()
-    dateElement.textContent = genLastEdited(note.updateAt)
+    note.updateAt = moment().valueOf()
+    dateElement.textContent = generateLastEdited(note.updateAt)
     saveNotes(notes)
 })
 
-bodyElement.addEventListener('input',function (e) {
+bodyElement.addEventListener('input', function (e) {
     note.body = e.target.value
-    note.updateAt = moment.valueOf()
-    dateElement.textContent = genLastEdited(note.updateAt)
+    note.updateAt = moment().valueOf()
+    dateElement.textContent = generateLastEdited(note.updateAt)
     saveNotes(notes)
 })
 
-removeElement.addEventListener('click',function (e) {
+removeElement.addEventListener('click', function (e) {
     removeNote(note.id)
     saveNotes(notes)
-    location.assign('/notes-app')
+    location.assign('/index.html')
 })
 
-window.addEventListener('storage',function (e) {
-    console.log(e.key)
-    if(e.key==='notes'){
+window.addEventListener('storage', function (e) {
+    if (e.key === 'notes') {
         notes = JSON.parse(e.newValue)
+        note = notes.find(function (note) {
+            return note.id === noteId
+        })
+
+        if (note === undefined) {
+            location.assign('/index.html')
+        }
+
+        titleElement.value = note.title
+        bodyElement.value = note.body
+        dateElement.textContent = generateLastEdited(note.updateAt)
     }
-
-    note = notes.find(function (note) {
-        return note.id === noteId
-    })
-
-    if (note === undefined){
-        location.assign('/notes-app')
-    }
-
-    titleElement.value = note.title
-    bodyElement.value = note.body
-    dateElement.textContent = genLastEdited(note.updateAt)
 })
