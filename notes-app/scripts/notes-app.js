@@ -20,7 +20,7 @@ document.querySelector('#create-note').addEventListener('click',  () => {
         updatedAt:timeStamp
     })
     saveNotes(notes)
-    location.assign(`/notes-app/edit.html#${id}`)
+    location.assign(`/edit.html#${id}`)
 })
 
 document.querySelector('#search-text').addEventListener('input',  (e) => {

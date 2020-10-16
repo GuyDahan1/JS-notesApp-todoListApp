@@ -2,21 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>TodoList</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <h1>Todos</h1>
-    <input id="searchTodoInput" type="text" placeholder="Search todo here">
-    <label>
-        <input type="checkbox" id="hideCompleted"> Hide completed
-    </label>
-    <div id="todos"></div>
-    <form id="addTodoForm">
-        <input type="text" placeholder="Add Todo" name="addTodoInput">
-        <button>Submit</button>
-    </form>
-    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
-    <script src="todos-function.js"></script>
-    <script src="todo-list.js"></script>
+    <div class="header">
+        <div class="container">
+            <h1 class="header__title">To-do App</h1>
+            <h2 class="header__subtitle">What do you need to do</h2>
+        </div>
+    </div>
+
+    <div class="actions">
+        <div class="actions__container">
+            <input class="input" id="searchTodoInput" type="text" placeholder="Search todo here">
+            <label class="checkbox">
+                <input  type="checkbox" id="hideCompleted"> Hide completed
+            </label>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="todos"></div>
+        <form id="addTodoForm">
+            <input class="input" type="text" placeholder="Add Todo" name="addTodoInput">
+            <button class="button">Submit</button>
+        </form>
+    </div>
+
+<!--    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>-->
+    <script src="scripts/uuidv4.js"></script>
+    <script src="scripts/todos-function.js"></script>
+    <script src="scripts/todo-list.js"></script>
 </body>
 </html>
